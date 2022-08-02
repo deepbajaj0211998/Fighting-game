@@ -35,11 +35,68 @@ public class Fighter : MonoBehaviour
         {
             animator.SetBool("Walk", false);
         }
+        if (Input.GetAxis("Horizontal") < -0.1)
+        {
+            animator.SetBool("WalkBack", true);
+        }
+        else
+        {
+            animator.SetBool("WalkBack", false);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            animator.SetTrigger("rKick");
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            animator.SetTrigger("lKick");
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            animator.SetTrigger("lPunch");
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            animator.SetTrigger("rPunch");
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("Jump");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetFloat("Health", lifePercent);
+        if(player == PlayerType.Human)
+        {
+            UpdateHumanInput();
+        }
+        if(opponent != null)
+        {
+            animator.SetFloat("Opponent_Health", opponent.lifePercent);
+        }
+        else
+        {
+            animator.SetFloat("Opponent_Health", 1);
+        }
     }
+
+    public float lifePercent
+    {
+        get
+        {
+            return life / maxHealth;
+        }
+    }
+
+    public Rigidbody body
+    {
+        get
+        {
+            return this.mybody;
+        }
+    }
+
 }
