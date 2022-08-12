@@ -10,6 +10,6 @@ public class FighterStateMachine : MonoBehaviour
     public float verticalForce;
     protected Fighter fighter;
 
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerindex);
+    //public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerindex);
 
 }
