@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.Netcode;
 
-public class Fighter : NetworkBehaviour
+public class Fighter : MonoBehaviour
 {
 
     public enum PlayerType
@@ -25,11 +24,6 @@ public class Fighter : NetworkBehaviour
     {
         mybody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        if (!IsOwner) Destroy(this);
     }
 
     public void UpdateHumanInput()
@@ -69,7 +63,7 @@ public class Fighter : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump();
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -105,12 +99,6 @@ public class Fighter : NetworkBehaviour
         {
             return this.mybody;
         }
-    }
-
-    void Jump()
-    {
-        mybody.AddForce(new Vector3(0, 2, 0), ForceMode.Impulse);
-        animator.SetTrigger("Jump");
     }
 
 }
