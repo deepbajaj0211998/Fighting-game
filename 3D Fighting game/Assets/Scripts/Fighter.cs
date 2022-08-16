@@ -18,6 +18,7 @@ public class Fighter : NetworkBehaviour
     public PlayerType player;
     protected Animator animator;
     private Rigidbody mybody;
+    public int playerJumpPower = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class Fighter : NetworkBehaviour
         if(Input.GetAxis("Horizontal") > 0.1)
         {
             animator.SetBool("Walk", true);
+
         }
         else
         {
@@ -67,7 +69,7 @@ public class Fighter : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            animator.SetTrigger("Jump");
+            Jump();
         }
     }
 
@@ -103,6 +105,12 @@ public class Fighter : NetworkBehaviour
         {
             return this.mybody;
         }
+    }
+
+    void Jump()
+    {
+        mybody.AddForce(new Vector3(0, 2, 0), ForceMode.Impulse);
+        animator.SetTrigger("Jump");
     }
 
 }
