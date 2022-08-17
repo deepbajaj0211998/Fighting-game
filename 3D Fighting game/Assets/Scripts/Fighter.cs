@@ -15,9 +15,9 @@ public class Fighter : MonoBehaviour
     public string fighterName;
     public Fighter opponent;
     public PlayerType player;
+    public FighterState currentState = FighterState.Idle;
     protected Animator animator;
     private Rigidbody mybody;
-    public int playerJumpPower = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +82,34 @@ public class Fighter : MonoBehaviour
         else
         {
             animator.SetFloat("Opponent_Health", 1);
+        }
+        if(life <= 0 && currentState != FighterState.KnockOut)
+        {
+            animator.SetTrigger("KnockOut");
+        }
+    }
+
+    public bool attacking
+    {
+        get
+        {
+            return currentState == FighterState.Attack;
+        }
+    }
+
+    public virtual void hurt(float damage)
+    {
+        if(life >= damage)
+        {
+            life -= damage;
+        }
+        else
+        {
+            life = 0;
+        }
+        if(life > 0)
+        {
+            animator.SetTrigger("TakeHit");
         }
     }
 
