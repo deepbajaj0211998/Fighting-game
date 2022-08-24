@@ -85,6 +85,11 @@ public class Fighter : MonoBehaviour
         if(life <= 0 && currentState != FighterState.KnockOut)
         {
             animator.SetTrigger("KnockOut");
+            Body.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        if(player == PlayerType.Human && currentState == FighterState.Win)
+        {
+            Body.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 
