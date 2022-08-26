@@ -766,8 +766,10 @@ MonoBehaviour:
   life: 100
   fighterName: RedMan
   opponent: {fileID: 1677455850}
-  player: 0
+  player: 1
   currentState: 0
+  random: 0
+  randomSetTime: 0
 --- !u!136 &544990385
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2392,6 +2394,8 @@ MonoBehaviour:
   opponent: {fileID: 544990384}
   player: 0
   currentState: 0
+  random: 0
+  randomSetTime: 0
 --- !u!1 &1699457011
 GameObject:
   m_ObjectHideFlags: 0
