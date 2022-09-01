@@ -84,15 +84,9 @@ public class Fighter : MonoBehaviour
     {
         animator.SetBool("Blocking", Blocking);
         animator.SetBool("Invulnerable", Invulnerable);
-        animator.SetBool("Enable", enabled);
-        animator.SetBool("Opponent_Attacking", opponent.attacking);
+        animator.SetBool("enable", enabled);
+        animator.SetBool("opponent.attacking", opponent.attacking);
         animator.SetFloat("DistanceToOpponent", GetDistanceToOpponent());
-        if(Time.time - randomSetTime > 1)
-        {
-            random = Random.value;
-            randomSetTime = Time.time;
-        }
-        animator.SetFloat("Random", random);
     }
 
     // Update is called once per frame
