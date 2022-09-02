@@ -25,7 +25,6 @@ public class HUDController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerText.text = battle.roundTime.ToString();
         if(leftBar.size > player1.lifePercent)
         {
             leftBar.size -= 0.01f;
