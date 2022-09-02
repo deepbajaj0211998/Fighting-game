@@ -414,6 +414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28a4f93176073c498deb4d7273b4642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  player1Tag: {fileID: 0}
+  player2Tag: {fileID: 0}
+  leftBar: {fileID: 0}
+  rightBar: {fileID: 0}
+  timerText: {fileID: 0}
+  battle: {fileID: 0}
 --- !u!4 &264673799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011829577894, guid: fd79887f970ff394c92966c76af78a10, type: 3}
@@ -1203,7 +1211,7 @@ PrefabInstance:
     - target: {fileID: 95000013483086724, guid: fd79887f970ff394c92966c76af78a10, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 30f454c52e7ead743a4ee680dd4dd964, type: 2}
+      objectReference: {fileID: 9100000, guid: 4737e6302c9030246ae91eff65c36dbd, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd79887f970ff394c92966c76af78a10, type: 3}
 --- !u!1 &761516151
@@ -1780,6 +1788,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c98d863a13fd464f98ec0ade59d808a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1: {fileID: 0}
+  player2: {fileID: 0}
+  roundTime: 99
+  LastTimeUpdate: 0
+  player1Win: {fileID: 0}
+  player2Win: {fileID: 0}
+  isGameOver: 0
+  hud: {fileID: 0}
 --- !u!4 &1142998427
 Transform:
   m_ObjectHideFlags: 0
