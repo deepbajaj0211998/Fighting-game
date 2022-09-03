@@ -766,7 +766,7 @@ MonoBehaviour:
   life: 100
   fighterName: RedMan
   opponent: {fileID: 1677455850}
-  player: 1
+  player: 0
   currentState: 0
 --- !u!136 &544990385
 CapsuleCollider:
