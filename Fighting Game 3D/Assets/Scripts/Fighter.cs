@@ -15,6 +15,7 @@ public class Fighter : MonoBehaviour
     public string fighterName;
     public Fighter opponent;
     public PlayerType player;
+    public FighterState currentState = FighterState.Idle;
     protected Animator animator;
     private Rigidbody myBody;
 
