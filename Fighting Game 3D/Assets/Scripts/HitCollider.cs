@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class HitCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public string punchName;
+    public float damage;
+    public Fighter owner;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        Fighter somebody = other.gameObject.GetComponent<Fighter>();
+        if (owner.attacking)
+        {
+            if(somebody != null && somebody != owner)
+            {
+                somebody.hurt(damage);
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

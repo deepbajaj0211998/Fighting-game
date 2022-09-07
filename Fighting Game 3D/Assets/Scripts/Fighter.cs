@@ -82,6 +82,34 @@ public class Fighter : MonoBehaviour
         {
             animator.SetFloat("Opponent_Health", 1);
         }
+        if(life <= 0 && currentState != FighterState.KnockOut)
+        {
+            animator.SetTrigger("KnockOut");
+        }
+    }
+
+    public bool attacking
+    {
+        get
+        {
+            return currentState == FighterState.Attack;
+        }
+    }
+
+    public virtual void hurt(float damage)
+    {
+        if(life >= damage)
+        {
+            life -= damage;
+        }
+        else
+        {
+            life = 0;
+        }
+        if(life > 0)
+        {
+            animator.SetTrigger("TakeHit");
+        }
     }
 
     public float lifePercent
