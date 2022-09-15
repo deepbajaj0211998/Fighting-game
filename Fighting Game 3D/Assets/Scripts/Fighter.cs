@@ -18,6 +18,8 @@ public class Fighter : MonoBehaviour
     public FighterState currentState = FighterState.Idle;
     protected Animator animator;
     private Rigidbody myBody;
+    private float random;
+    private float randomSetTime;
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +40,21 @@ public class Fighter : MonoBehaviour
         }
         if (Input.GetAxis("Horizontal") < -0.1)
         {
-            animator.SetBool("WalkBack", true);
+			if (opponent.attacking)
+			{
+                animator.SetBool("WalkBack", false);
+                animator.SetBool("Block", true);
+            }
+            else
+            {
+                animator.SetBool("WalkBack", true);
+                animator.SetBool("Block", false);
+            }
         }
         else
         {
             animator.SetBool("WalkBack", false);
+            animator.SetBool("Block", false);
         }
         if (Input.GetKeyDown(KeyCode.U))
         {
@@ -66,6 +78,15 @@ public class Fighter : MonoBehaviour
         }
     }
 
+    public void UpdateAIInput()
+	{
+        animator.SetBool("Blocking", blocking);
+        animator.SetBool("Invulnerable", invulnerable);
+        animator.SetBool("Enable",enabled);
+        animator.SetBool("opponent.attacking", opponent.attacking);
+        animator.SetFloat("DistanceToOpponent", GetDistanceToOpponent());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -73,6 +94,10 @@ public class Fighter : MonoBehaviour
         if(player == PlayerType.Human)
         {
             UpdateHumanInput();
+        }
+		else
+		{
+            UpdateAIInput();
         }
         if(opponent != null)
         {
@@ -88,6 +113,19 @@ public class Fighter : MonoBehaviour
         }
     }
 
+    float GetDistanceToOpponent()
+	{
+        return Mathf.Abs(transform.position.x - opponent.transform.position.x);
+	}
+
+    bool blocking
+	{
+		get
+		{
+            return currentState == FighterState.Defend;
+		}
+	}
+
     public bool attacking
     {
         get
@@ -98,21 +136,38 @@ public class Fighter : MonoBehaviour
 
     public virtual void hurt(float damage)
     {
-        if(life >= damage)
-        {
-            life -= damage;
-        }
-        else
-        {
-            life = 0;
-        }
-        if(life > 0)
-        {
-            animator.SetTrigger("TakeHit");
+		if (!invulnerable)
+		{
+			if (blocking)
+			{
+                damage *= 0.2f;
+			}
+            if (life >= damage)
+            {
+                life -= damage;
+            }
+            else
+            {
+                life = 0;
+            }
+            if (life > 0)
+            {
+                animator.SetTrigger("TakeHit");
+            }
         }
     }
 
-    public float lifePercent
+    public bool invulnerable
+	{
+		get
+		{
+            return currentState == FighterState.TakeHit
+                || currentState == FighterState.Defend
+                || currentState == FighterState.KnockOut;
+		}
+	}
+
+public float lifePercent
     {
         get
         {
